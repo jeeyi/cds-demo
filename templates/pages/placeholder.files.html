@@ -1,0 +1,20 @@
+{% block files %}
+<table class="table table-striped table-hover">
+  <tbody>
+    {%for i in range(0, files_len)%}
+    <tr class="file-row">
+      <td class="file-select">
+        <label class="checkbox-inline">
+          <input type="checkbox" class="checkbox-input" />
+        </label>
+      </td>
+      <td class="file-icon">
+        <i class="{{files[i].icon}}" style="font-size:36px"></i>
+      </td>
+      <td>{{files[i].name}}</td>
+    </tr>
+
+    {%endfor%}
+  </tbody>
+</table>
+{% endblock %}

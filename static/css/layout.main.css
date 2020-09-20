@@ -1,0 +1,75 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+#sidenav-container {
+  width: 18%;
+  height: 100%;
+  min-height: inherit;
+  float: left;
+  background-color: #333333;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding: 80px 0 60px;
+}
+
+#sidenav button {
+  font-size: x-large;
+  color: #cccccc;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+#sidenav a {
+  padding: 18px 16px 12px 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: x-large;
+  color: #cccccc;
+  display: block;
+}
+
+#sidenav a:hover {
+  color: #ffffff;
+}
+
+#main-container {
+  height: 100%;
+  min-height: inherit;
+  margin-left: 18%; /* Same as the width of the sidebar */
+  padding: 60px 20px 60px;
+}
+
+#footer > .container-fluid {
+  padding: 10px 15px;
+  font-size: medium;
+}
+
+.page-header {
+  color: #428bca;
+}

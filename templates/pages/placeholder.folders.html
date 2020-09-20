@@ -1,0 +1,7 @@
+{% block folders %} {%for i in range(0, folders_len)%}
+
+<a href="{{ url_for('folder', id=folders[i].id) }}"
+  ><i class="fa fa-folder fa_custom"></i>&nbsp;&nbsp;{{folders[i].name}}</a
+>
+
+{%endfor%} {% endblock %}

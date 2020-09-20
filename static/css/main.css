@@ -1,0 +1,66 @@
+/**
+ * @file
+ * Main stylesheet file.
+ */
+
+/*****************************************************************************
+ * Main elements
+ ****************************************************************************/
+html {
+  overflow-y: scroll;
+}
+a {
+  cursor: pointer;
+}
+::selection {
+  background: #555;
+  color: #fff;
+}
+::-moz-selection {
+  background: #555;
+  color: #fff;
+}
+::-webkit-selection {
+  background: #555;
+  color: #fff;
+}
+/* Main elements end */
+
+/*****************************************************************************
+ * Various other styles
+ ****************************************************************************/
+
+.table > tbody > tr > td {
+  vertical-align: middle;
+}
+
+.file-row {
+  height: 30px;
+  font-size: larger;
+}
+
+.file-select {
+  width: 5%;
+}
+
+.file-icon {
+  width: 5%;
+}
+
+.file-buttons {
+  float: right;
+}
+
+.file-buttons button {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+input[type="checkbox"],
+.checkbox-input {
+  height: 18px;
+  width: 18px;
+}
+
+/* Various other styles end */

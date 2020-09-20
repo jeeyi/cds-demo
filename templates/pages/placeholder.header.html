@@ -1,0 +1,13 @@
+{% block header %} {%for i in range(0, ancestors_len)%}
+<a href="#">{{ancestors[i]}}</a>&nbsp;>&nbsp; {%endfor%} {{folder_name}}
+<i class="fa fa-folder-open-o" style="font-size:30px"></i>
+<div class="file-buttons">
+  <button>
+    <i class="fa fa-cloud-upload" style="font-size:36px"></i>
+  </button>
+  <button>
+    <i class="fa fa-cloud-download" style="font-size:36px"></i>
+  </button>
+</div>
+
+{% endblock %}
