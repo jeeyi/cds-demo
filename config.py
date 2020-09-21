@@ -1,5 +1,8 @@
 import os
 
+JSONIFY_PRETTYPRINT_REGULAR = False
+WTF_CSRF_CHECK_DEFAULT = False
+
 # Grabs the folder where the script runs.
 basedir = os.path.abspath(os.path.dirname(__file__))
 

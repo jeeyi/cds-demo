@@ -1,12 +1,27 @@
+from flask import jsonify
+
 from config import ROOT_FOLDER_ID
 import cds as cds
 
 
-def get_folder(folder_id=None):
+def create_folder(data):
+    is_demo = True if data["is_demo"] == "true" else False
+    folder_name = data["folder_name"]
+    parent_folder_id = data["parent_folder_id"]
+
+    if is_demo or parent_folder_id.isdigit():
+        return jsonify({"name": folder_name})
+
+    cds_data = {"label": folder_name, "parent": parent_folder_id}
+    cds_folder = cds.create_folder(cds_data)
+    return jsonify({"id": cds_folder["id"], "name": cds_folder["label"]})
+
+
+def get_folder(folder_id):
     if folder_id and folder_id.isdigit():
         return get_demo(folder_id)
 
-    cds_folder = cds.get_folder(folder_id or ROOT_FOLDER_ID)
+    cds_folder = cds.get_folder(folder_id)
 
     folder_name = cds_folder["label"]
     ancestors = [ancestor["label"] for ancestor in cds_folder["ancestors"]]
@@ -18,6 +33,7 @@ def get_folder(folder_id=None):
     files = get_files(file_names)
 
     folder_data = {
+        "current_folder_id": folder_id,
         "ancestors": ancestors,
         "ancestors_len": len(ancestors),
         "files": files,
@@ -79,6 +95,7 @@ def get_demo(folder_id=None):
         ]
     )
     demo_data = {
+        "current_folder_id": 0,
         "ancestors": ancestors,
         "ancestors_len": len(ancestors),
         "files": files,

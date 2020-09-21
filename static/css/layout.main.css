@@ -10,6 +10,7 @@ body {
 /* Wrapper for page content to push down footer */
 #wrap {
   min-height: 100%;
+  /* height: auto !important; */
   height: 100%;
   /* Negative indent footer by its height */
   margin: 0 auto -60px;
@@ -21,6 +22,8 @@ body {
 #footer {
   height: 60px;
   background-color: #f5f5f5;
+  position: relative;
+  z-index: 1;
 }
 
 /* Custom page CSS
@@ -63,6 +66,14 @@ body {
   min-height: inherit;
   margin-left: 18%; /* Same as the width of the sidebar */
   padding: 60px 20px 60px;
+}
+
+#main-container #content {
+  min-height: inherit;
+}
+
+#createFolderModal {
+  font-size: large;
 }
 
 #footer > .container-fluid {

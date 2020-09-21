@@ -50,11 +50,16 @@ def home():
     return render_template("pages/placeholder.home.html", **data)
 
 
-@app.route("/folder")
+@app.route("/folder", methods=["GET", "POST"])
 @app.route("/folder/<id>")
-def folder(id=None):
-    data = get_folder(id)
-    return render_template("pages/placeholder.folder.html", **data)
+def folder(id=ROOT_FOLDER_ID):
+    if request.method == "GET":
+        data = get_folder(id)
+        return render_template("pages/placeholder.folder.html", **data)
+
+    if request.method == "POST":
+        data = request.form
+        return create_folder(data)
 
 
 @app.route("/about")
