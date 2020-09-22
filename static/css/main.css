@@ -57,6 +57,16 @@ a {
   background: none;
 }
 
+.folder-modal {
+  font-size: large;
+  color: #333333;
+}
+
+.folder-modal input[type="button"] {
+  margin: 10px 16px;
+  float: right;
+}
+
 input[type="checkbox"],
 .checkbox-input {
   height: 18px;

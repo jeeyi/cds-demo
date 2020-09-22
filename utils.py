@@ -1,4 +1,5 @@
 from flask import jsonify
+from werkzeug.utils import secure_filename
 
 from config import ROOT_FOLDER_ID
 import cds as cds
@@ -12,8 +13,7 @@ def create_folder(data):
     if is_demo or parent_folder_id.isdigit():
         return jsonify({"name": folder_name})
 
-    cds_data = {"label": folder_name, "parent": parent_folder_id}
-    cds_folder = cds.create_folder(cds_data)
+    cds_folder = cds.create_folder(folder_name, parent_folder_id)
     return jsonify({"id": cds_folder["id"], "name": cds_folder["label"]})
 
 
@@ -24,7 +24,10 @@ def get_folder(folder_id):
     cds_folder = cds.get_folder(folder_id)
 
     folder_name = cds_folder["label"]
-    ancestors = [ancestor["label"] for ancestor in cds_folder["ancestors"]]
+    ancestors = [
+        {"id": ancestor["uuid"], "name": ancestor["label"]}
+        for ancestor in cds_folder["ancestors"]
+    ]
     folders = [
         {"id": folder["id"], "name": folder["label"]}
         for folder in cds_folder["children"]
@@ -33,16 +36,26 @@ def get_folder(folder_id):
     files = get_files(file_names)
 
     folder_data = {
-        "current_folder_id": folder_id,
         "ancestors": ancestors,
-        "ancestors_len": len(ancestors),
         "files": files,
-        "files_len": len(files),
-        "folders": folders,
-        "folders_len": len(folders),
+        "folder_id": folder_id,
         "folder_name": folder_name,
+        "folders": folders,
     }
     return folder_data
+
+
+def upload_file(file, data):
+    is_demo = True if data["is_demo"] == "true" else False
+    parent_folder_id = data["parent_folder_id"]
+    file_name = secure_filename(file.filename)
+
+    if is_demo or parent_folder_id.isdigit():
+        return jsonify({"name": file_name, "icon": get_file_icon(file_name)})
+
+    cds_file = cds.upload_file(file, file_name, parent_folder_id)
+    file_name = cds_file["label"]
+    return jsonify({"name": file_name, "icon": get_file_icon(file_name)})
 
 
 def get_file_icon(file_name):
@@ -61,17 +74,18 @@ def get_file_icon(file_name):
 
 
 def get_files(file_names):
-    return [
-        {"name": file_name, "icon": get_file_icon(file_name)}
-        for file_name in file_names
-    ]
+    return [get_file(file_name) for file_name in file_names]
+
+
+def get_file(file_name):
+    return {"name": file_name, "icon": get_file_icon(file_name)}
 
 
 def get_demo(folder_id=None):
     folder_name = f"Folder{folder_id}" if folder_id else "Demo Folder"
     ancestors = [
-        "Meetings",
-        "Weekly",
+        {"id": "1", "name": "Weekly"},
+        {"id": "1", "name": "Meetings"},
     ]
     folders = [
         {"id": "1", "name": "Folder1"},
@@ -95,13 +109,10 @@ def get_demo(folder_id=None):
         ]
     )
     demo_data = {
-        "current_folder_id": 0,
         "ancestors": ancestors,
-        "ancestors_len": len(ancestors),
         "files": files,
-        "files_len": len(files),
-        "folders": folders,
-        "folders_len": len(folders),
+        "folder_id": 0,
         "folder_name": folder_name,
+        "folders": folders,
     }
     return demo_data

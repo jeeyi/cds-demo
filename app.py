@@ -62,6 +62,13 @@ def folder(id=ROOT_FOLDER_ID):
         return create_folder(data)
 
 
+@app.route("/file", methods=["POST"])
+def file():
+    data = request.form
+    file = request.files["file"]
+    return upload_file(file, data)
+
+
 @app.route("/about")
 def about():
     return render_template("pages/placeholder.about.html")

@@ -48,6 +48,10 @@ body {
   background: none;
 }
 
+#sidenav button:hover {
+  color: #ffffff;
+}
+
 #sidenav a {
   padding: 18px 16px 12px 10px;
   text-align: center;
@@ -70,10 +74,6 @@ body {
 
 #main-container #content {
   min-height: inherit;
-}
-
-#createFolderModal {
-  font-size: large;
 }
 
 #footer > .container-fluid {

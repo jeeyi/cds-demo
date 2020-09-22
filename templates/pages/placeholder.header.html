@@ -1,13 +1,78 @@
-{% block header %} {%for i in range(0, ancestors_len)%}
-<a href="#">{{ancestors[i]}}</a>&nbsp;>&nbsp; {%endfor%} {{folder_name}}
-<i class="fa fa-folder-open-o" style="font-size:30px"></i>
-<div class="file-buttons">
-  <button>
-    <i class="fa fa-cloud-upload" style="font-size:36px"></i>
-  </button>
-  <button>
-    <i class="fa fa-cloud-download" style="font-size:36px"></i>
-  </button>
+<h2>
+  {% block header %} {%for ancestor in ancestors|reverse%}
+  <a href="{{ url_for('folder', id=ancestor['id']) }}">{{ancestor["name"]}}</a
+  >&nbsp;>&nbsp; {%endfor%} {{folder_name}}
+  <i class="fa fa-folder-open-o" style="font-size:30px"></i>
+  <div class="file-buttons">
+    <button
+      id="upload-button"
+      type="button"
+      class="btn"
+      data-toggle="modal"
+      data-target="#upload-modal"
+    >
+      <i class="fa fa-cloud-upload" style="font-size:36px"></i>
+    </button>
+    <button
+      id="download-button"
+      type="button"
+      class="btn"
+      data-toggle="modal"
+      data-target="#download-modal"
+    >
+      <i class="fa fa-cloud-download" style="font-size:36px"></i>
+    </button>
+  </div>
+</h2>
+
+<div
+  class="modal fade folder-modal"
+  id="upload-modal"
+  tabindex="-1"
+  role="dialog"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="upload-modal-label">
+          Upload File
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="" enctype="multipart/form-data">
+          <div class="row">
+            <div class="form-group">
+              <div class="col-xs-8">
+                <input
+                  type="file"
+                  class="btn btn-lg"
+                  id="file-to-updload"
+                  name="file-name"
+                />
+              </div>
+              <div class="col-xs-4">
+                <input
+                  type="button"
+                  id="upload-file-button"
+                  value="Upload"
+                  data-endpoint="{{request.endpoint}}"
+                  data-parent="{{folder_id}}"
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock %}

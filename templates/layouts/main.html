@@ -112,7 +112,7 @@
             ><button
               type="button"
               data-toggle="modal"
-              data-target="#createFolderModal"
+              data-target="#create-folder-modal"
             >
               <i class="fa fa-plus-square fa_custom"></i>&nbsp;&nbsp;New Folder
             </button></a
@@ -123,15 +123,15 @@
       </div>
 
       <div
-        class="modal fade"
-        id="createFolderModal"
+        class="modal fade folder-modal"
+        id="create-folder-modal"
         tabindex="-1"
         role="dialog"
       >
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h3 class="modal-title" id="createFolderModalLabel">
+              <h3 class="modal-title" id="create-folder-modalLabel">
                 Create New Folder
                 <button
                   type="button"
@@ -166,11 +166,11 @@
                 Close
               </button>
               <button
-                id="addFolderButton"
+                id="add-folder-button"
                 type="button"
                 class="btn btn-primary"
                 data-endpoint="{{request.endpoint}}"
-                data-parent="{{current_folder_id}}"
+                data-parent="{{folder_id}}"
               >
                 Create
               </button>
@@ -217,6 +217,11 @@
     <script
       type="text/javascript"
       src="/static/js/libs/bootstrap-3.1.1.min.js"
+      defer
+    ></script>
+    <script
+      type="text/javascript"
+      src="/static/js/libs/loadingoverlay.min.js"
       defer
     ></script>
     <script type="text/javascript" src="/static/js/plugins.js" defer></script>
