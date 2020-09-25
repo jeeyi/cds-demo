@@ -10,7 +10,8 @@ from logging import Formatter, FileHandler
 from forms import *
 import os
 
-from utils import *
+from config import ROOT_FOLDER_ID
+import utils as utils
 
 # ----------------------------------------------------------------------------#
 # App Config.
@@ -46,7 +47,7 @@ def login_required(test):
 
 @app.route("/")
 def home():
-    data = get_demo()
+    data = utils.get_demo()
     return render_template("pages/placeholder.home.html", **data)
 
 
@@ -54,19 +55,25 @@ def home():
 @app.route("/folder/<id>")
 def folder(id=ROOT_FOLDER_ID):
     if request.method == "GET":
-        data = get_folder(id)
+        data = utils.get_folder(id)
         return render_template("pages/placeholder.folder.html", **data)
 
     if request.method == "POST":
         data = request.form
-        return create_folder(data)
+        return utils.create_folder(data)
 
 
 @app.route("/file", methods=["POST"])
 def file():
     data = request.form
     file = request.files["file"]
-    return upload_file(file, data)
+    return utils.upload_file(file, data)
+
+
+@app.route("/download", methods=["POST"])
+def download():
+    data = request.form
+    return utils.download(data)
 
 
 @app.route("/about")

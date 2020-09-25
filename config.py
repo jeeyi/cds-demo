@@ -17,6 +17,6 @@ SECRET_KEY = "my precious"
 SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "database.db")
 
 CDS_URL = "http://localhost:8002/api/v1"
-CDS_KEY = "hjn8SPZZ.ishYcNORLMzqBlAdbdkFIxHiiZ2LD80Y"
-ROOT_FOLDER_ID = "d2eba7d2-da53-45f3-b1d6-1a1a9c1e4234"
+CDS_KEY = "OkeM2gDF.vCKtaxobPWCeiWRJHcehrouTb3QQDHfw"
+ROOT_FOLDER_ID = "ab383f88-8c7e-46eb-ad5d-877d46d83e0c"
 CARTA_USER_ID = 1
